@@ -1,10 +1,12 @@
 import { faClock } from "@fortawesome/free-regular-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import React, { createContext } from "react"
+import React, { useContext } from "react"
 import logo from "./assets/logo.png"
 import Meeting from "./components/Meeting"
 import SelectTime from "./components/SelectTime"
+import { DemoContext } from "./App"
 const DemoComponent = () => {
+  const context = useContext(DemoContext)
   return (
     <div className="pt-16 pl-16 flex bg-green-300">
       <div className="border-r-[1px]">
@@ -31,9 +33,11 @@ const DemoComponent = () => {
       <div className="bg-white col-span-1 w-[494px]">
         <Meeting />
       </div>
-      <div>
-        <SelectTime />
-      </div>
+      {context.isTimeSelected ? (
+        <div>
+          <SelectTime />
+        </div>
+      ) : null}
     </div>
   )
 }

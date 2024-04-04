@@ -13,28 +13,6 @@ const SelectTime = () => {
       <div className="overflow-auto h-[504px]">
         {time.map((t, index) => (
           <div key={index}>
-            {/* {!timeSelected && (
-              <button
-                className="h-[61px] w-[215px] text-[19px] text-[#0269fe] font-bold rounded-md border mb-[12px] border-[2px] border-[#8daaea] hover:bg-[#0269fe] hover:text-white hover:border-none"
-                // onClick={() => setTimeSelected(!timeSelected)}
-                onClick={() => selectedIndex(index)}
-              >
-                {t}
-              </button>
-            )}
-            {timeSelected && (
-              <div key={index} className="flex">
-                <button
-                  className="h-[61px] w-[105px] mr-[6px] text-[19px] text-[#0269fe] font-bold rounded-md border mb-[12px] border-[2px] border-[#8daaea] hover:bg-[#0269fe] hover:text-white hover:border-none"
-                  onClick={() => setTimeSelected(!timeSelected)}
-                >
-                  {t}
-                </button>
-                <button className="h-[61px] w-[105px] text-[19px] text-[#0269fe] font-bold rounded-md border mb-[12px] border-[2px] border-[#8daaea] hover:bg-[#0269fe] hover:text-white hover:border-none">
-                  Next
-                </button>
-              </div>
-            )} */}
             {selectedIndex !== index ? (
               <button
                 className="h-[61px] w-[215px] text-[19px] text-[#0269fe] font-bold rounded-md border mb-[12px] border-[2px] border-[#8daaea] hover:bg-[#0269fe] hover:text-white hover:border-none"

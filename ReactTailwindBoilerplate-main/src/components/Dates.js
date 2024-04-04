@@ -1,10 +1,22 @@
-import React, { useEffect, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
+import { DemoContext } from "../App"
 
 const Dates = ({ startDay, endDay, month }) => {
   const [pastDays, setPastDays] = useState(0)
   const now = new Date()
   const thisMonth = now.getMonth()
   const [dotHidden, setDotHidden] = useState(false)
+  const [selctedDay, setSelectedDay] = useState(0)
+  // const [clickOne, setClickOne] = useState(false)
+  console.log(selctedDay)
+  const context = useContext(DemoContext)
+  console.log(context.isTimeSelected)
+
+  const handleClick = () => {
+    context.changeSelected()
+    // setSelectedDay(dayCounter)
+  }
+
   useEffect(() => {
     const today = now.getDay()
     setPastDays(today)
@@ -18,8 +30,7 @@ const Dates = ({ startDay, endDay, month }) => {
   const generateCells = () => {
     let cells = []
     let dayCounter = 1
-    console.log("this month", thisMonth)
-    console.log("month", month)
+
     function render() {
       if (dayCounter === pastDays && thisMonth + 1 === month) {
         return (
@@ -27,6 +38,7 @@ const Dates = ({ startDay, endDay, month }) => {
             className={`w-[45px] h-[45px] rounded-full relative hover:bg-[#0269fe] hover:text-white`}
             onMouseEnter={() => setDotHidden(true)}
             onMouseLeave={() => setDotHidden(false)}
+            onClick={() => handleClick()}
           >
             {dayCounter}
             <span
@@ -40,19 +52,20 @@ const Dates = ({ startDay, endDay, month }) => {
         return <div>{dayCounter}</div>
       } else {
         return (
-          <button className="w-[45px] h-[45px] rounded-full bg-[#eff5ff] text-[#0c5eeb] hover:bg-[#0269fe] hover:text-white">
+          <button
+            className="w-[45px] h-[45px] rounded-full bg-[#eff5ff] text-[#0c5eeb] hover:bg-[#0269fe] hover:text-white"
+            onClick={() => handleClick()}
+          >
             {dayCounter}
           </button>
         )
       }
     }
 
-    // Create cells for the empty days before the start day
     for (let i = 1; i < startDay; i++) {
       cells.push(<td key={`empty-${i}`}></td>)
     }
 
-    // Create cells for the days of the month
     for (let i = startDay; i < 8; i++) {
       cells.push(
         <td
