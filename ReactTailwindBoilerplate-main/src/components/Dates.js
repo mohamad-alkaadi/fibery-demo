@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react"
 import { DemoContext } from "../App"
+import { day } from "../helper-functions/dateTime"
 
 const Dates = ({ startDay, endDay, month }) => {
   const [pastDays, setPastDays] = useState(0)
@@ -8,13 +9,15 @@ const Dates = ({ startDay, endDay, month }) => {
   const [dotHidden, setDotHidden] = useState(false)
   const [selctedDay, setSelectedDay] = useState(0)
   // const [clickOne, setClickOne] = useState(false)
+
   console.log(selctedDay)
   const context = useContext(DemoContext)
   console.log(context.isTimeSelected)
 
-  const handleClick = () => {
+  const handleClick = (dayCounter, e) => {
     context.changeSelected()
-    // setSelectedDay(dayCounter)
+    console.log(dayCounter)
+    console.log(e.target.textContent)
   }
 
   useEffect(() => {
@@ -38,7 +41,7 @@ const Dates = ({ startDay, endDay, month }) => {
             className={`w-[45px] h-[45px] rounded-full relative hover:bg-[#0269fe] hover:text-white`}
             onMouseEnter={() => setDotHidden(true)}
             onMouseLeave={() => setDotHidden(false)}
-            onClick={() => handleClick()}
+            onClick={(e) => handleClick(dayCounter, e)}
           >
             {dayCounter}
             <span
@@ -54,7 +57,7 @@ const Dates = ({ startDay, endDay, month }) => {
         return (
           <button
             className="w-[45px] h-[45px] rounded-full bg-[#eff5ff] text-[#0c5eeb] hover:bg-[#0269fe] hover:text-white"
-            onClick={() => handleClick()}
+            onClick={(e) => handleClick(dayCounter, e)}
           >
             {dayCounter}
           </button>
@@ -77,7 +80,6 @@ const Dates = ({ startDay, endDay, month }) => {
       )
       dayCounter++
     }
-
     while (dayCounter <= 35) {
       let rowCells = []
       for (let i = 0; i < 7; i++) {
