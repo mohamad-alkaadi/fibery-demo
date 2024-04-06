@@ -1,3 +1,10 @@
+import {
+  faMinus,
+  faPlus,
+  faX,
+  faXmark,
+} from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import React, { useRef, useState } from "react"
 
 const MeetingDetails = () => {
@@ -20,10 +27,14 @@ const MeetingDetails = () => {
     { id: 9, value: "📚 Education", isChecked: false },
     { id: 10, value: "❓ Something else", isChecked: false },
   ])
+  const [guestEmails, setGuestEmails] = useState([]) // State to store guest emails
+  const [showGuestButton, setShowGuestButton] = useState(false)
   const nameRef = useRef()
   const emailRef = useRef()
+  const guestRef = useRef()
   const shareAnythingRef = useRef()
   const shareWorkspaceName = useRef()
+
   const handleMeetingCheckboxChange = (id) => {
     const updatedCheckboxes = workCheckboxes.map((checkbox) =>
       checkbox.id === id
@@ -32,6 +43,7 @@ const MeetingDetails = () => {
     )
     setWorkCheckboxes(updatedCheckboxes)
   }
+
   const handleAboutCheckboxChange = (id) => {
     const updatedCheckboxes = aboutCheckboxes.map((checkbox) =>
       checkbox.id === id
@@ -40,6 +52,28 @@ const MeetingDetails = () => {
     )
     setAboutCheckboxes(updatedCheckboxes)
   }
+
+  const handleAddGuest = () => {
+    const newGuestEmail = guestRef.current.value.trim() // Trim whitespace
+
+    // Input validation (optional):
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(newGuestEmail)) {
+      alert("Please enter a valid email address.")
+      guestRef.current.value = "" // Clear input field even on error
+      return
+    }
+
+    // Check for duplicate emails
+    if (guestEmails.includes(newGuestEmail)) {
+      alert("This email address has already been added.")
+      guestRef.current.value = "" // Clear input field on duplicate
+      return
+    }
+
+    setGuestEmails([...guestEmails, newGuestEmail])
+    guestRef.current.value = "" // Clear the input field
+  }
+
   return (
     <div className="h-[760px] w-[723px] bg-white overflow-auto">
       <h1 className="pl-8 pt-8 text-[25px] font-bold">Enter Details</h1>
@@ -66,11 +100,57 @@ const MeetingDetails = () => {
             />
           </label>
         </div>
-        <div className="ml-8 mt-3">
-          <button className="border-[1px] rounded-2xl text-[#026af9] border-[#026af9] pl-[14px] pr-[14px] pt-[4px] pb-[7px] text-[16px]">
-            Add Guests
-          </button>
-        </div>
+
+        {!showGuestButton ? (
+          <div className="ml-8 mt-3">
+            <button
+              onClick={() => setShowGuestButton(true)}
+              className="border-[1px] rounded-2xl text-[#026af9] border-[#026af9] pl-[14px] pr-[14px] pt-[4px] pb-[7px] text-[16px]"
+            >
+              Add Guests
+            </button>
+          </div>
+        ) : (
+          <div className="pl-8 mt-6 pb-0">
+            <label className="text-[17px] font-bold">
+              Add Guest
+              <br />
+              <div className="flex items-center">
+                <input
+                  className="border-[1px] border-[#ccc] h-[54px] w-[492px] rounded-md mt-2"
+                  type="text"
+                  ref={guestRef}
+                />
+                <div className="mt-2 ml-2">
+                  <button
+                    onClick={handleAddGuest}
+                    className="text-[#026af9] border-[#026af9] border-[1px] w-[22px] h-[22px] mb-1 flex justify-center items-center hover:bg-[#026af9] hover:text-[#fff]"
+                  >
+                    <FontAwesomeIcon icon={faPlus} />
+                  </button>
+                  <button
+                    onClick={() => setShowGuestButton(false)}
+                    className="text-red-500 border-red-500 hover:bg-red-500 hover:text-white border-[1px] w-[22px] h-[22px] flex justify-center items-center"
+                  >
+                    <FontAwesomeIcon icon={faXmark} />
+                  </button>
+                </div>
+              </div>
+            </label>
+          </div>
+        )}
+
+        {guestEmails.length > 0 && (
+          <div className="ml-8 mt-3">
+            <div className="font-bold">Guests:</div>
+            <ul>
+              {guestEmails.map((guestEmail) => (
+                <li key={guestEmail}>{guestEmail}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+
         <div className="ml-8 mt-6 ">
           <div className="font-bold">I want Fibery to work for: *</div>
           {workCheckboxes.map((checkbox) => (

@@ -87,16 +87,6 @@ export const leapYear = (inputYear) => {
   }
 }
 
-const daysOfWeek = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-]
-
 export const getFirstDay = (year, month) => {
   var day = new Date(year + "-" + month + "-01").getDay()
   if (day === 0) {
@@ -111,7 +101,20 @@ export const getDay = () => {
   return today
 }
 
-// export const getTime = (date) => {
+const daysOfWeek = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+]
+export const getDayOfWeek = (day, month, year) => {
+  const date = new Date(year, month - 1, day)
+  const dayOfWeek = date.getDay()
+  return daysOfWeek[dayOfWeek]
+}
 export const getTime = () => {
   const date = new Date()
   const hours = date.getHours()
@@ -126,6 +129,11 @@ export const getMonth = () => {
   return month
 }
 
+export const getYear = () => {
+  const now = new Date()
+  const year = now.getFullYear()
+  return year
+}
 export const convertTimeToInt = (time) => {
   const timeWithoutMinutes = time.slice(0, -3)
   const timeAsInteger = parseInt(timeWithoutMinutes, 10)

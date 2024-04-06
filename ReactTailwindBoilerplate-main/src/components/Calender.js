@@ -1,11 +1,17 @@
 import React, { useContext, useEffect, useState } from "react"
-import { time, day, leapYear, getFirstDay } from "../helper-functions/dateTime"
+import {
+  time,
+  day,
+  leapYear,
+  getFirstDay,
+  getDayOfWeek,
+} from "../helper-functions/dateTime"
 import Dates from "./Dates"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCaretDown, faEarthAmericas } from "@fortawesome/free-solid-svg-icons"
 import { DemoContext } from "../App"
-const Calender = ({ month, setMonth }) => {
-  // const [month, setMonth] = useState(1)
+const Calender = () => {
+  const [month, setMonth] = useState(1)
   const [year, setYear] = useState(1)
   const [startDay, setStartDay] = useState(0)
   const [endDay, setEndDay] = useState(0)
@@ -35,17 +41,21 @@ const Calender = ({ month, setMonth }) => {
       return {
         ...prevState,
         month: month,
+        monthName: cleanedMonthName,
+        // dayName: getDayOfWeek(context.dateTime.day, month, yearNum),
       }
     })
-  }, [month, year])
+  }, [month, year, day])
 
   const leftChange = () => {
     if (activeLeftButton) {
       if (month === 1) {
         setYear((y) => y - 1)
         setMonth(12)
+        context.changeSelectedToFalse()
       } else {
         setMonth((m) => m - 1)
+        context.changeSelectedToFalse()
       }
     }
   }
@@ -55,8 +65,10 @@ const Calender = ({ month, setMonth }) => {
       if (month === 12) {
         setYear((y) => y + 1)
         setMonth(1)
+        context.changeSelectedToFalse()
       } else {
         setMonth((m) => m + 1)
+        context.changeSelectedToFalse()
       }
     }
   }
@@ -79,7 +91,12 @@ const Calender = ({ month, setMonth }) => {
         </button>
       </div>
       <div className="flex justify-center items-center">
-        <Dates month={month} startDay={startDay} endDay={endDay} />
+        <Dates
+          month={month}
+          yearNum={yearNum}
+          startDay={startDay}
+          endDay={endDay}
+        />
       </div>
       <div className="mt-6">
         <div className="text-[21px]">Time zone</div>

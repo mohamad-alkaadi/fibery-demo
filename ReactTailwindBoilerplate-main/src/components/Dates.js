@@ -1,19 +1,15 @@
 import React, { useContext, useEffect, useState } from "react"
 import { DemoContext } from "../App"
-import { day } from "../helper-functions/dateTime"
+import { day, getDayOfWeek } from "../helper-functions/dateTime"
 
-const Dates = ({ startDay, endDay, month }) => {
+const Dates = ({ startDay, endDay, month, yearNum }) => {
   const [pastDays, setPastDays] = useState(0)
   const now = new Date()
   const thisMonth = now.getMonth()
   const [dotHidden, setDotHidden] = useState(false)
   const [selctedDay, setSelectedDay] = useState(0)
-  // const [clickOne, setClickOne] = useState(false)
 
-  // console.log("selected day:", selctedDay)
   const context = useContext(DemoContext)
-  // console.log(context.isTimeSelected)
-  // changeSelectedToFalse, changeSelectedToTrue
   const handleClick = (dayCounter, e) => {
     context.changeSelected()
     if (selctedDay === e.target.textContent) {
@@ -22,15 +18,14 @@ const Dates = ({ startDay, endDay, month }) => {
     } else {
       setSelectedDay(e.target.textContent)
       context.changeSelectedToTrue()
+
+      context.setDateTime((prevState) => ({
+        ...prevState,
+        dayName: getDayOfWeek(e.target.textContent, month, yearNum),
+      }))
     }
   }
-  function activeStyle() {
-    if (context.dateTime.day === selctedDay) {
-      return "bg-[#0269fe] text-white"
-    } else {
-      return ""
-    }
-  }
+
   useEffect(() => {
     const today = now.getDay()
     setPastDays(today)
@@ -40,6 +35,7 @@ const Dates = ({ startDay, endDay, month }) => {
     const today = now.getDay()
     setPastDays(today)
   }, [startDay])
+  // dayName: getDayOfWeek(context.dateTime.day, month, yearNum),
 
   useEffect(() => {
     context.setDateTime((prevState) => ({
