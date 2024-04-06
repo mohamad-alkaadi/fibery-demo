@@ -104,3 +104,30 @@ export const getFirstDay = (year, month) => {
   }
   return day
 }
+
+export const getDay = () => {
+  const date = new Date()
+  const today = date.getDay()
+  return today
+}
+
+// export const getTime = (date) => {
+export const getTime = () => {
+  const date = new Date()
+  const hours = date.getHours()
+  const minutes = date.getMinutes()
+  const formattedMinutes = minutes.toString().padStart(2, "0")
+  return `${hours}:${formattedMinutes}`
+}
+
+export const getMonth = () => {
+  const now = new Date()
+  const month = now.getMonth() + 1
+  return month
+}
+
+export const convertTimeToInt = (time) => {
+  const timeWithoutMinutes = time.slice(0, -3)
+  const timeAsInteger = parseInt(timeWithoutMinutes, 10)
+  return timeAsInteger
+}

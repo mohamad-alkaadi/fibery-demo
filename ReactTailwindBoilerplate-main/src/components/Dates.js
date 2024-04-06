@@ -10,16 +10,27 @@ const Dates = ({ startDay, endDay, month }) => {
   const [selctedDay, setSelectedDay] = useState(0)
   // const [clickOne, setClickOne] = useState(false)
 
-  console.log(selctedDay)
+  // console.log("selected day:", selctedDay)
   const context = useContext(DemoContext)
-  console.log(context.isTimeSelected)
-
+  // console.log(context.isTimeSelected)
+  // changeSelectedToFalse, changeSelectedToTrue
   const handleClick = (dayCounter, e) => {
     context.changeSelected()
-    console.log(dayCounter)
-    console.log(e.target.textContent)
+    if (selctedDay === e.target.textContent) {
+      context.changeSelectedToFalse()
+      setSelectedDay(0)
+    } else {
+      setSelectedDay(e.target.textContent)
+      context.changeSelectedToTrue()
+    }
   }
-
+  function activeStyle() {
+    if (context.dateTime.day === selctedDay) {
+      return "bg-[#0269fe] text-white"
+    } else {
+      return ""
+    }
+  }
   useEffect(() => {
     const today = now.getDay()
     setPastDays(today)
@@ -30,6 +41,13 @@ const Dates = ({ startDay, endDay, month }) => {
     setPastDays(today)
   }, [startDay])
 
+  useEffect(() => {
+    context.setDateTime((prevState) => ({
+      ...prevState,
+      day: selctedDay,
+    }))
+  }, [selctedDay])
+
   const generateCells = () => {
     let cells = []
     let dayCounter = 1
@@ -38,7 +56,8 @@ const Dates = ({ startDay, endDay, month }) => {
       if (dayCounter === pastDays && thisMonth + 1 === month) {
         return (
           <button
-            className={`w-[45px] h-[45px] rounded-full relative hover:bg-[#0269fe] hover:text-white`}
+            className={`w-[45px] h-[45px] rounded-full relative hover:bg-[#0269fe] hover:text-white
+            `}
             onMouseEnter={() => setDotHidden(true)}
             onMouseLeave={() => setDotHidden(false)}
             onClick={(e) => handleClick(dayCounter, e)}
@@ -56,7 +75,7 @@ const Dates = ({ startDay, endDay, month }) => {
       } else {
         return (
           <button
-            className="w-[45px] h-[45px] rounded-full bg-[#eff5ff] text-[#0c5eeb] hover:bg-[#0269fe] hover:text-white"
+            className={`w-[45px] h-[45px] rounded-full bg-[#eff5ff] text-[#0c5eeb] hover:bg-[#0269fe] hover:text-white `}
             onClick={(e) => handleClick(dayCounter, e)}
           >
             {dayCounter}
