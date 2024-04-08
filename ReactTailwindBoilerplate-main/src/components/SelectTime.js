@@ -51,7 +51,7 @@ const SelectTime = () => {
     }
   }
   return (
-    <div className="w-[300px] h-[720px] bg-white">
+    <div className="xl:w-[280px] h-[720px] pr-2 bg-white">
       <div className="text-[20px] pt-[110px] mb-[43px]">
         {context.dateTime.dayName}, {context.dateTime.monthName}{" "}
         {context.dateTime.day}

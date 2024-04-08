@@ -8,11 +8,7 @@ const Dates = ({ startDay, endDay, month, yearNum }) => {
   const thisMonth = now.getMonth()
   const [dotHidden, setDotHidden] = useState(false)
   const [selctedDay, setSelectedDay] = useState(0)
-  console.log("start day", startDay)
-  console.log("end day", endDay)
-  console.log("month", month)
-  console.log("this month + 1", thisMonth + 1)
-  console.log("past days", pastDays)
+
   const context = useContext(DemoContext)
   const handleClick = (dayCounter, e) => {
     context.changeSelected()
@@ -63,7 +59,6 @@ const Dates = ({ startDay, endDay, month, yearNum }) => {
             onClick={(e) => handleClick(dayCounter, e)}
           >
             {dayCounter}
-            {console.log("first if, and day counter is:", dayCounter)}
             <span
               className={`absolute bottom-1 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-gray-600 rounded-full hover:bg-[#0269fe] ${
                 dotHidden ? "hidden" : ""
@@ -72,12 +67,7 @@ const Dates = ({ startDay, endDay, month, yearNum }) => {
           </button>
         )
       } else if (dayCounter < pastDays && thisMonth + 1 === month) {
-        return (
-          <div>
-            {dayCounter}{" "}
-            {console.log("secound if, and day counter is:", dayCounter)}
-          </div>
-        )
+        return <div>{dayCounter} </div>
         // } else if (dayCounter > pastDays && thisMonth + 1 === month) {
       } else {
         return (
@@ -86,7 +76,6 @@ const Dates = ({ startDay, endDay, month, yearNum }) => {
             onClick={(e) => handleClick(dayCounter, e)}
           >
             {dayCounter}{" "}
-            {console.log("third if, and day counter is:", dayCounter)}
           </button>
         )
       }

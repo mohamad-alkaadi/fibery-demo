@@ -20,7 +20,7 @@ const MeetingForm = () => {
     if (!context.timeConfirmed) {
       return (
         <div className="flex">
-          <div className="bg-white col-span-1 w-[494px]">
+          <div className="bg-white col-span-1 lg:w-[494px]">
             <Meeting month={month} setMonth={setMonth} />
           </div>
           {context.isTimeSelected ? (
@@ -41,8 +41,8 @@ const MeetingForm = () => {
   return (
     <div className="flex">
       <div
-        className={`border-r-[1px] ${
-          context.timeConfirmed ? "w-[389px]" : "w-[493px]"
+        className={`border-r-[1px] min-w-[300px] ${
+          context.timeConfirmed ? "lg:w-[389px]" : "lg:w-[493px]"
         }`}
       >
         <div className="bg-white h-[213px] flex justify-center items-center border-b-[1px] relative">
