@@ -7,7 +7,8 @@ import SelectTime from "./SelectTime"
 import { DemoContext } from "../App"
 import MeetingDetails from "./MeetingDetails"
 import { faArrowLeft, faEarthAmericas } from "@fortawesome/free-solid-svg-icons"
-
+import { addMinutesToTime } from "../helper-functions/dateTime"
+// import {}
 const MeetingForm = () => {
   const [month, setMonth] = useState(1)
   const context = useContext(DemoContext)
@@ -38,7 +39,7 @@ const MeetingForm = () => {
     }
   }
   return (
-    <div className="pt-16 pl-16 flex bg-green-300">
+    <div className="flex">
       <div
         className={`border-r-[1px] ${
           context.timeConfirmed ? "w-[389px]" : "w-[493px]"
@@ -71,9 +72,12 @@ const MeetingForm = () => {
               <div className="text-gray-500 mb-6 text-[20px] flex justify-start items-center">
                 <FontAwesomeIcon icon={faCalendar} />
                 <div className="ml-3">
-                  12:00 - 12:45, Thursday,
+                  {context.dateTime.time} -{" "}
+                  {addMinutesToTime(context.dateTime.time, 45)},{" "}
+                  {context.dateTime.dayName},
                   <br />
-                  November 30, 2023
+                  {context.dateTime.monthName} {context.dateTime.day},{" "}
+                  {context.dateTime.year}
                 </div>
               </div>
             ) : null}

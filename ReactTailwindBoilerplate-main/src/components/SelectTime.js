@@ -13,7 +13,7 @@ const SelectTime = () => {
   const [selectedIndex, setSelectedIndex] = useState(-1)
   const context = useContext(DemoContext)
   const handleNext = (e, t) => {
-    context.handleSelectTime(t)
+    context.setDateTime((prevState) => ({ ...prevState, time: t }))
     context.setTimeConfirmed(true)
     e.stopPropagation()
   }

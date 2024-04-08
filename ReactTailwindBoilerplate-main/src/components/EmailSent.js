@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useContext } from "react"
 import placeholder from "../assets/placeholder.jpg"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {
@@ -13,10 +13,14 @@ import {
 } from "@fortawesome/free-solid-svg-icons"
 import google from "../assets/google.svg"
 import microsoft from "../assets/microsoft.svg"
+import { DemoContext } from "../App"
+import { addMinutesToTime } from "../helper-functions/dateTime"
 
 const EmailSent = () => {
+  const context = useContext(DemoContext)
+  console.log(context.form)
   return (
-    <div className="pt-16 pl-16 flex bg-[#a5a5a5]">
+    <div className="flex">
       <div className="h-[804px] w-[1099px] bg-white">
         {/* <div className="grid justify-center"> */}
         <div className="w-[80px] h-[80px] m-auto mt-[40px]">
@@ -46,7 +50,13 @@ const EmailSent = () => {
               <div className="flex justify-center items-center text-[23px] mr-3">
                 <FontAwesomeIcon icon={faCalendar} />
               </div>
-              <p>12:00 - 12:45, Thursday, November 30,2023</p>
+
+              <p>
+                {context.dateTime.time} -{" "}
+                {addMinutesToTime(context.dateTime.time, 45)},{" "}
+                {context.dateTime.dayName}, {context.dateTime.monthName}{" "}
+                {context.dateTime.day}, {context.dateTime.year}
+              </p>
             </div>
             <div className="flex text-[19px] text-gray-500 mb-5">
               <div className="flex justify-center items-center text-[23px] mr-3">

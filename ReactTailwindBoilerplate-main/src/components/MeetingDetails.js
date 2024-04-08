@@ -28,8 +28,12 @@ const MeetingDetails = () => {
     { id: 9, value: "📚 Education", isChecked: false },
     { id: 10, value: "❓ Something else", isChecked: false },
   ])
-  const [guestEmails, setGuestEmails] = useState([]) // State to store guest emails
+  const [guestEmails, setGuestEmails] = useState([])
   const [showGuestButton, setShowGuestButton] = useState(false)
+  const [checkError, setCheckError] = useState({
+    name: false,
+    email: false,
+  })
   const nameRef = useRef()
   const emailRef = useRef()
   const guestRef = useRef()
@@ -54,40 +58,80 @@ const MeetingDetails = () => {
     setAboutCheckboxes(updatedCheckboxes)
   }
 
-  const handleAddGuest = () => {
-    const newGuestEmail = guestRef.current.value.trim() // Trim whitespace
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    return emailRegex.test(email.trim())
+  }
 
-    // Input validation (optional):
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(newGuestEmail)) {
+  const handleAddGuest = () => {
+    const newGuestEmail = guestRef.current.value.trim()
+
+    if (!validateEmail(newGuestEmail)) {
       alert("Please enter a valid email address.")
-      guestRef.current.value = "" // Clear input field even on error
+      guestRef.current.value = ""
       return
     }
 
-    // Check for duplicate emails
     if (guestEmails.includes(newGuestEmail)) {
       alert("This email address has already been added.")
-      guestRef.current.value = "" // Clear input field on duplicate
+      guestRef.current.value = ""
       return
     }
 
     setGuestEmails([...guestEmails, newGuestEmail])
-    guestRef.current.value = "" // Clear the input field
+    guestRef.current.value = ""
+  }
+
+  const handleRemoveGuest = (guestEmail) => {
+    setGuestEmails(guestEmails.filter((email) => email !== guestEmail))
+  }
+
+  const nameCheck = () => {
+    return nameRef.current.value.trim() !== ""
+  }
+  const emailCheck = () => {
+    return emailRef.current.value.trim() !== ""
   }
 
   function handleSchedule() {
-    console.log("hello")
-    context.setEmailSent(true)
-    console.log(context.emailSent)
+    const validName = nameCheck()
+    const validEmail = emailCheck()
+    if (validName && validEmail) {
+      setCheckError({ email: false, name: false })
+      context.setForm((prevState) => ({
+        ...prevState,
+        name: nameRef.current.value,
+        email: emailRef.current.value,
+        guestEmails: guestEmails,
+        shareAnything: shareAnythingRef.current.value,
+        shareName: shareWorkspaceName.current.value,
+      }))
+      context.setEmailSent(true)
+    } else if (!validEmail && !validName) {
+      setCheckError({ email: true, name: true })
+      console.log("not email and not name")
+      alert("Please enter your name and email before scheduling.")
+    } else if (!validName) {
+      setCheckError({ email: false, name: true })
+      console.log("not name")
+
+      alert("Please enter your name before scheduling.")
+    } else if (!validEmail) {
+      setCheckError({ email: true, name: false })
+      console.log("not email")
+      alert("Please enter your email before scheduling.")
+    }
   }
 
+  console.log("render")
   return (
     <div className="h-[760px] w-[723px] bg-white overflow-auto">
       <h1 className="pl-8 pt-8 text-[25px] font-bold">Enter Details</h1>
       <div>
         <div className="pl-8 mt-2 pb-0">
           <label className="text-[17px] font-bold">
-            Name <span></span>*
+            Name{" "}
+            {checkError.name ? <span className="text-red-500">*</span> : null}
             <br />
             <input
               className="border-[1px] border-[#ccc] h-[54px] w-[492px] rounded-md mt-2"
@@ -98,7 +142,8 @@ const MeetingDetails = () => {
         </div>
         <div className="pl-8 mt-6 pb-0">
           <label className="text-[17px] font-bold">
-            Email *
+            Email{" "}
+            {checkError.email ? <span className="text-red-500">*</span> : null}
             <br />
             <input
               className="border-[1px] border-[#ccc] h-[54px] w-[492px] rounded-md mt-2"
@@ -152,12 +197,23 @@ const MeetingDetails = () => {
             <div className="font-bold">Guests:</div>
             <ul>
               {guestEmails.map((guestEmail) => (
-                <li key={guestEmail}>{guestEmail}</li>
+                <li className="flex" key={guestEmail}>
+                  <div className="flex justify-center items-center">
+                    {guestEmail}
+                  </div>
+                  <div className="flex justify-center items-center">
+                    <button
+                      onClick={() => handleRemoveGuest(guestEmail)}
+                      className="text-red-500 border-red-500 hover:bg-red-500 hover:text-white border-[1px] w-[16px] h-[16px] flex justify-center items-center ml-2 mt-1"
+                    >
+                      <FontAwesomeIcon icon={faXmark} />
+                    </button>
+                  </div>
+                </li>
               ))}
             </ul>
           </div>
         )}
-
         <div className="ml-8 mt-6 ">
           <div className="font-bold">I want Fibery to work for: *</div>
           {workCheckboxes.map((checkbox) => (

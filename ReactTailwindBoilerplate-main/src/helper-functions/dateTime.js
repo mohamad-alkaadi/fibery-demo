@@ -139,3 +139,17 @@ export const convertTimeToInt = (time) => {
   const timeAsInteger = parseInt(timeWithoutMinutes, 10)
   return timeAsInteger
 }
+
+export const addMinutesToTime = (timeStr, minutesToAdd) => {
+  const [hours, minutes] = timeStr.split(":").map(Number)
+
+  const totalMinutes = hours * 60 + minutes + minutesToAdd
+
+  const newHours = Math.floor(totalMinutes / 60)
+  const newMinutes = totalMinutes % 60
+
+  const newTimeStr = `${String(newHours).padStart(2, "0")}:${String(
+    newMinutes
+  ).padStart(2, "0")}`
+  return newTimeStr
+}

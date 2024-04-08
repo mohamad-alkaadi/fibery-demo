@@ -1,6 +1,6 @@
 import { createContext, useState } from "react"
 import DemoComponent from "./DemoComponent"
-
+import "./App.css"
 export const DemoContext = createContext()
 
 function App() {
@@ -9,12 +9,21 @@ function App() {
     monthName: "no name",
     day: 0,
     dayName: "",
-    time: 0,
+    time: "",
+    year: 0,
+  })
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    guestEmails: [],
+    shareAnything: "",
+    shareName: "",
   })
   const [isTimeSelected, setIsTimeSelected] = useState(false)
   const [selectedTime, setSelectedTime] = useState("")
   const [timeConfirmed, setTimeConfirmed] = useState(false)
   const [emailSent, setEmailSent] = useState(false)
+  const [demoOpen, setDemoOpen] = useState(false)
   const now = new Date()
   const time = now.getHours()
   function changeSelected() {
@@ -45,10 +54,15 @@ function App() {
         setTimeConfirmed,
         emailSent,
         setEmailSent,
+        form,
+        setForm,
       }}
     >
-      <div className=" bg-[#a5a5a5] h-[1080px] w-[1980px] select-none">
-        <DemoComponent />
+      <div className="select-none">
+        <button onClick={() => setDemoOpen((d) => !d)}>
+          {!demoOpen ? "Open demo" : "Close"}
+        </button>
+        <DemoComponent demoOpen={demoOpen} setDemoOpen={setDemoOpen} />
       </div>
     </DemoContext.Provider>
   )

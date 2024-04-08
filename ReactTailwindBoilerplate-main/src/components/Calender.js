@@ -42,7 +42,7 @@ const Calender = () => {
         ...prevState,
         month: month,
         monthName: cleanedMonthName,
-        // dayName: getDayOfWeek(context.dateTime.day, month, yearNum),
+        year: year,
       }
     })
   }, [month, year, day])
