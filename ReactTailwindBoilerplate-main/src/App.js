@@ -47,7 +47,7 @@ function App() {
         setEmailSent,
       }}
     >
-      <div className=" bg-red-300 h-[1080px] w-[1980px] select-none">
+      <div className=" bg-[#a5a5a5] h-[1080px] w-[1980px] select-none">
         <DemoComponent />
       </div>
     </DemoContext.Provider>

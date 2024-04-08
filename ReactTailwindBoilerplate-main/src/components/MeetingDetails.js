@@ -5,7 +5,8 @@ import {
   faXmark,
 } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import React, { useRef, useState } from "react"
+import React, { useContext, useRef, useState } from "react"
+import { DemoContext } from "../App"
 
 const MeetingDetails = () => {
   const [workCheckboxes, setWorkCheckboxes] = useState([
@@ -34,7 +35,7 @@ const MeetingDetails = () => {
   const guestRef = useRef()
   const shareAnythingRef = useRef()
   const shareWorkspaceName = useRef()
-
+  const context = useContext(DemoContext)
   const handleMeetingCheckboxChange = (id) => {
     const updatedCheckboxes = workCheckboxes.map((checkbox) =>
       checkbox.id === id
@@ -72,6 +73,12 @@ const MeetingDetails = () => {
 
     setGuestEmails([...guestEmails, newGuestEmail])
     guestRef.current.value = "" // Clear the input field
+  }
+
+  function handleSchedule() {
+    console.log("hello")
+    context.setEmailSent(true)
+    console.log(context.emailSent)
   }
 
   return (
@@ -210,7 +217,10 @@ const MeetingDetails = () => {
             className="w-[500px] h-[54px] border-[#ccc] border-[1px] rounded-lg"
           />
         </div>
-        <button className="ml-8 mb-[30px] text-[19px] pt-[11px] pb-[12px] pr-[20px] pl-[20px] rounded-3xl mt-[24px] bg-[#016afe] text-white">
+        <button
+          onClick={() => handleSchedule()}
+          className="ml-8 mb-[30px] text-[19px] pt-[11px] pb-[12px] pr-[20px] pl-[20px] rounded-3xl mt-[24px] bg-[#016afe] text-white"
+        >
           Schedule Event
         </button>
       </div>
