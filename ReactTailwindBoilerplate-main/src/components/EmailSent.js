@@ -44,7 +44,7 @@ const EmailSent = () => {
               <div className="flex justify-center items-center text-[23px] mr-3">
                 <FontAwesomeIcon icon={faUser} />
               </div>
-              <p>Polina Zenevich</p>
+              <p>{context.form.name}</p>
             </div>
             <div className="flex text-[19px] text-gray-500 mb-5">
               <div className="flex justify-center items-center text-[23px] mr-3">
