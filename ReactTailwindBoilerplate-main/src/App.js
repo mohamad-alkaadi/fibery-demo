@@ -1,6 +1,7 @@
 import { createContext, useState } from "react"
 import DemoComponent from "./DemoComponent"
 import "./App.css"
+import { SendEmail } from "./components/SendEmail"
 export const DemoContext = createContext()
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
   const [selectedTime, setSelectedTime] = useState("")
   const [timeConfirmed, setTimeConfirmed] = useState(false)
   const [emailSent, setEmailSent] = useState(false)
+  const [activeEmailSent, setActiveEmailSent] = useState(false)
   const [demoOpen, setDemoOpen] = useState(false)
   const now = new Date()
   const time = now.getHours()
@@ -65,6 +67,7 @@ function App() {
           {!demoOpen ? "Open demo" : "Close"}
         </button>
         <DemoComponent demoOpen={demoOpen} setDemoOpen={setDemoOpen} />
+        {emailSent ? <SendEmail /> : null}
       </div>
     </DemoContext.Provider>
   )
