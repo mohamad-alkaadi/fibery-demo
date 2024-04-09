@@ -74,8 +74,8 @@ const Calender = () => {
   }
 
   return (
-    <div className="mt-10 select-none">
-      <div className="text-gray-700 text-center text-[23px] mb-3">
+    <div className="md:mt-10 sm:mt-2 select-none">
+      <div className="text-gray-700 text-center text-[23px] md:mb-3 sm:mb-0 sm:scale-90 md:scale-100 ">
         <button
           onClick={() => leftChange()}
           className="mr-6 w-[45px] h-[45px] rounded-full hover:bg-[#eff5ff] hover:text-[#0c5eeb]"
@@ -90,21 +90,13 @@ const Calender = () => {
           {">"}
         </button>
       </div>
-      <div className="flex justify-center items-center">
+      <div className="flex justify-center items-center sm:scale-90 md:scale-100 xsm:scale-75">
         <Dates
           month={month}
           yearNum={yearNum}
           startDay={startDay}
           endDay={endDay}
         />
-      </div>
-      <div className="mt-6">
-        <div className="text-[21px]">Time zone</div>
-        <div className="text-[21px]">
-          <FontAwesomeIcon icon={faEarthAmericas} /> UK, Ireland, Lisbon Time
-          (16:54){" "}
-          <FontAwesomeIcon className="cursor-pointer" icon={faCaretDown} />
-        </div>
       </div>
     </div>
   )

@@ -125,28 +125,30 @@ const MeetingDetails = () => {
 
   console.log("render")
   return (
-    <div className="h-[760px] w-[723px] bg-white overflow-auto">
-      <h1 className="pl-8 pt-8 text-[25px] font-bold">Enter Details</h1>
+    <div className="xsm:pl-3 md:pl-0 xl:h-[792px] md:h-[858px] md:w-[560px] xl:w-[723px] sm:w-[532px] xsm:w-[350px] bg-white overflow-auto">
+      <h1 className="md:pl-8 pt-8 text-gray-800 text-[23px] font-bold">
+        Enter Details
+      </h1>
       <div>
-        <div className="pl-8 mt-2 pb-0">
-          <label className="text-[17px] font-bold">
+        <div className="md:pl-8 mt-2 pb-0">
+          <label className="text-[17px] font-semibold">
             Name{" "}
             {checkError.name ? <span className="text-red-500">*</span> : null}
             <br />
             <input
-              className="border-[1px] border-[#ccc] h-[54px] w-[492px] rounded-md mt-2"
+              className="border-[1px] border-[#ccc] h-[54px] xsm:w-[280px] sm:w-[450px] md:w-[492px] rounded-md mt-2"
               type="text"
               ref={nameRef}
             />
           </label>
         </div>
-        <div className="pl-8 mt-6 pb-0">
-          <label className="text-[17px] font-bold">
+        <div className="md:pl-8 mt-6 pb-0">
+          <label className="text-[17px] font-semibold">
             Email{" "}
             {checkError.email ? <span className="text-red-500">*</span> : null}
             <br />
             <input
-              className="border-[1px] border-[#ccc] h-[54px] w-[492px] rounded-md mt-2"
+              className="border-[1px] border-[#ccc] h-[54px] xsm:w-[280px] md:w-[492px] rounded-md mt-2 sm:w-[450px]"
               type="text"
               ref={emailRef}
             />
@@ -154,7 +156,7 @@ const MeetingDetails = () => {
         </div>
 
         {!showGuestButton ? (
-          <div className="ml-8 mt-3">
+          <div className="md:ml-8 mt-3">
             <button
               onClick={() => setShowGuestButton(true)}
               className="border-[1px] rounded-2xl text-[#026af9] border-[#026af9] pl-[14px] pr-[14px] pt-[4px] pb-[7px] text-[16px]"
@@ -163,13 +165,13 @@ const MeetingDetails = () => {
             </button>
           </div>
         ) : (
-          <div className="pl-8 mt-6 pb-0">
+          <div className="md:pl-8 mt-6 pb-0">
             <label className="text-[17px] font-bold">
               Add Guest
               <br />
               <div className="flex items-center">
                 <input
-                  className="border-[1px] border-[#ccc] h-[54px] w-[492px] rounded-md mt-2"
+                  className="border-[1px] border-[#ccc] h-[54px] md:w-[492px] xsm:w-[280px] rounded-md mt-2 sm:w-[450px]"
                   type="text"
                   ref={guestRef}
                 />
@@ -193,7 +195,7 @@ const MeetingDetails = () => {
         )}
 
         {guestEmails.length > 0 && (
-          <div className="ml-8 mt-3">
+          <div className="md:ml-8 mt-3">
             <div className="font-bold">Guests:</div>
             <ul>
               {guestEmails.map((guestEmail) => (
@@ -214,10 +216,10 @@ const MeetingDetails = () => {
             </ul>
           </div>
         )}
-        <div className="ml-8 mt-6 ">
-          <div className="font-bold">I want Fibery to work for: *</div>
+        <div className="md:ml-8 mt-6 ">
+          <div className="font-semibold">I want Fibery to work for: *</div>
           {workCheckboxes.map((checkbox) => (
-            <div className="h-[18px] mb-4 mt-4">
+            <div className="h-[18px] mb-4 mt-4 font-light">
               <label key={checkbox.id} className="flex">
                 <div className="flex justify-center items-center">
                   <input
@@ -235,10 +237,10 @@ const MeetingDetails = () => {
             </div>
           ))}
         </div>
-        <div className="ml-8 mt-6 ">
-          <div className="font-bold">You are more about *</div>
+        <div className="md:ml-8 mt-6 ">
+          <div className="font-semibold">You are more about *</div>
           {aboutCheckboxes.map((checkbox) => (
-            <div className="h-[18px] mb-4 mt-4">
+            <div className="h-[18px] mb-4 mt-4 font-light">
               <label key={checkbox.id} className="flex">
                 <input
                   type="checkbox"
@@ -254,28 +256,28 @@ const MeetingDetails = () => {
             </div>
           ))}
         </div>
-        <div className="ml-8 mt-10">
-          <div className="max-w-[500px] text-[15.9px] font-bold mb-3">
+        <div className="md:ml-8 mt-10">
+          <div className="sm:w-[450px] md:max-w-[500px] text-[15.9px] font-semibold mb-3">
             Please, share anything that will help prepare for our meeting
           </div>
           <textarea
             ref={shareAnythingRef}
-            className="border-[1px] border-[#ccc] w-[512px] rounded-lg min-h-[83px]"
+            className="border-[1px] xsm:w-[280px] border-[#ccc] sm:w-[450px] md:w-[492px] rounded-lg min-h-[83px]"
           />
         </div>
-        <div className="ml-8 mt-5">
-          <div className="max-w-[500px] text-[15.9px] font-bold mb-3">
+        <div className="md:ml-8 mt-5">
+          <div className="sm:w-[450px] md:max-w-[500px] text-[15.9px] font-semibold mb-3">
             Please, share with us the name of your Fibery workspace (if any)
           </div>
           <input
             type="text"
             ref={shareWorkspaceName}
-            className="w-[500px] h-[54px] border-[#ccc] border-[1px] rounded-lg"
+            className="sm:w-[450px] md:w-[492px] xsm:w-[280px] h-[54px] border-[#ccc] border-[1px] rounded-lg"
           />
         </div>
         <button
           onClick={() => handleSchedule()}
-          className="ml-8 mb-[30px] text-[19px] pt-[11px] pb-[12px] pr-[20px] pl-[20px] rounded-3xl mt-[24px] bg-[#016afe] text-white"
+          className="md:ml-8 mb-[30px] text-[19px] pt-[11px] pb-[12px] pr-[20px] pl-[20px] rounded-3xl mt-[24px] bg-[#016afe] text-white"
         >
           Schedule Event
         </button>
