@@ -39,7 +39,6 @@ function App() {
   function handleSelectTime(time) {
     setSelectedTime(time)
   }
-  console.log("date time week name:", dateTime.dayName)
   return (
     <DemoContext.Provider
       value={{
@@ -59,7 +58,10 @@ function App() {
       }}
     >
       <div className="select-none">
-        <button onClick={() => setDemoOpen((d) => !d)}>
+        <button
+          className="bg-slate-600 text-white rounded-lg ml-2 mt-2 p-1"
+          onClick={() => setDemoOpen((d) => !d)}
+        >
           {!demoOpen ? "Open demo" : "Close"}
         </button>
         <DemoComponent demoOpen={demoOpen} setDemoOpen={setDemoOpen} />

@@ -11,6 +11,7 @@ import { DemoContext } from "../App"
 const SelectTime = () => {
   const [timeSelected, setTimeSelected] = useState(false)
   const [selectedIndex, setSelectedIndex] = useState(-1)
+  const now = new Date()
   const context = useContext(DemoContext)
   const handleNext = (e, t) => {
     context.setDateTime((prevState) => ({ ...prevState, time: t }))
@@ -23,7 +24,7 @@ const SelectTime = () => {
   }
   const thisMonth = getMonth()
   const timeNow = getTime()
-  const dayNow = getDay()
+  const dayNow = now.getDate()
 
   function render(t, index) {
     if (

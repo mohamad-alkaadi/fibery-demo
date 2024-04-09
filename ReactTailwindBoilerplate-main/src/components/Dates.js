@@ -26,12 +26,6 @@ const Dates = ({ startDay, endDay, month, yearNum }) => {
     }
   }
 
-  // useEffect(() => {
-  //   console.log("im here")
-  //   const today = now.getDay()
-  //   setPastDays(today)
-  // }, [])
-
   useEffect(() => {
     const today = now.getDate()
     setPastDays(today)

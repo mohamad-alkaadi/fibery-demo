@@ -109,21 +109,17 @@ const MeetingDetails = () => {
       context.setEmailSent(true)
     } else if (!validEmail && !validName) {
       setCheckError({ email: true, name: true })
-      console.log("not email and not name")
       alert("Please enter your name and email before scheduling.")
     } else if (!validName) {
       setCheckError({ email: false, name: true })
-      console.log("not name")
 
       alert("Please enter your name before scheduling.")
     } else if (!validEmail) {
       setCheckError({ email: true, name: false })
-      console.log("not email")
       alert("Please enter your email before scheduling.")
     }
   }
 
-  console.log("render")
   return (
     <div className="xsm:pl-3 md:pl-0 xl:h-[792px] md:h-[858px] md:w-[560px] xl:w-[723px] sm:w-[532px] xsm:w-[350px] bg-white overflow-auto">
       <h1 className="md:pl-8 pt-8 text-gray-800 text-[23px] font-bold">
