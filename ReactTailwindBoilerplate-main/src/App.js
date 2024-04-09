@@ -24,10 +24,7 @@ function App() {
   const [selectedTime, setSelectedTime] = useState("")
   const [timeConfirmed, setTimeConfirmed] = useState(false)
   const [emailSent, setEmailSent] = useState(false)
-  const [activeEmailSent, setActiveEmailSent] = useState(false)
   const [demoOpen, setDemoOpen] = useState(false)
-  const now = new Date()
-  const time = now.getHours()
   function changeSelected() {
     setIsTimeSelected((t) => !t)
   }

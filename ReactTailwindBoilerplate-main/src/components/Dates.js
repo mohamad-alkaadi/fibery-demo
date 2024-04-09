@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react"
 import { DemoContext } from "../App"
-import { day, getDay, getDayOfWeek } from "../helper-functions/dateTime"
+import { getDayOfWeek } from "../helper-functions/dateTime"
 
 const Dates = ({ startDay, endDay, month, yearNum }) => {
   const [pastDays, setPastDays] = useState(0)

@@ -1,14 +1,6 @@
 import React, { useContext, useEffect, useState } from "react"
-import {
-  time,
-  day,
-  leapYear,
-  getFirstDay,
-  getDayOfWeek,
-} from "../helper-functions/dateTime"
+import { day, leapYear, getFirstDay } from "../helper-functions/dateTime"
 import Dates from "./Dates"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faCaretDown, faEarthAmericas } from "@fortawesome/free-solid-svg-icons"
 import { DemoContext } from "../App"
 const Calender = () => {
   const [month, setMonth] = useState(1)
@@ -19,11 +11,9 @@ const Calender = () => {
   const [activeRightButton, setActiveRightButton] = useState(true)
   const context = useContext(DemoContext)
   const now = new Date()
-  const DayNumber = now.getDay()
   const yearNum = now.getFullYear()
   const months = leapYear(yearNum)
   const cleanedMonthName = months[month].name
-  const monthLength = months[month].days
   const monthNumber = now.getMonth() + 1
 
   useEffect(() => {

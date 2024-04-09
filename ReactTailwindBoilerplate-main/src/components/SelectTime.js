@@ -4,12 +4,10 @@ import {
   getMonth,
   convertTimeToInt,
   getTime,
-  getDay,
 } from "../helper-functions/dateTime"
 import { DemoContext } from "../App"
 
 const SelectTime = () => {
-  const [timeSelected, setTimeSelected] = useState(false)
   const [selectedIndex, setSelectedIndex] = useState(-1)
   const now = new Date()
   const context = useContext(DemoContext)

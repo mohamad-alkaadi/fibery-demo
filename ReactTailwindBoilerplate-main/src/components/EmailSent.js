@@ -6,11 +6,7 @@ import {
   faCircleCheck,
   faUser,
 } from "@fortawesome/free-regular-svg-icons"
-import {
-  faCheck,
-  faEarthAmericas,
-  faVideo,
-} from "@fortawesome/free-solid-svg-icons"
+import { faEarthAmericas, faVideo } from "@fortawesome/free-solid-svg-icons"
 import google from "../assets/google.svg"
 import microsoft from "../assets/microsoft.svg"
 import { DemoContext } from "../App"
@@ -18,12 +14,12 @@ import { addMinutesToTime } from "../helper-functions/dateTime"
 
 const EmailSent = () => {
   const context = useContext(DemoContext)
-  console.log(context.form)
+  // console.log(context.form)
   return (
     <div className="flex">
       <div className="sm:h-[804px] overflow-auto xsm:h-[640px] lg:w-[1099px] md:w-[831px] sm:w-[540px] xsm:w-[349px] bg-white">
         <div className="w-[80px] h-[80px] m-auto mt-[40px]">
-          <img className="rounded-full" src={placeholder} />
+          <img className="rounded-full" alt="user pic" src={placeholder} />
         </div>
         <h1 className="text-center sm:text-[30px] md:text-[33px] xsm:text-[25px] font-bold mb-3 mt-7">
           <FontAwesomeIcon
@@ -84,13 +80,13 @@ const EmailSent = () => {
         <div className="m-auto w-fit flex sm:flex-row xsm:flex-col mt-6">
           <button className="h-[51px] flex border-[1px] justify-center items-center rounded-full mr-3 md:pr-8 md:pl-8 xsm:pr-8 xsm:pl-8 xsm:mb-2 sm:mb-0 sm:pl-4 sm:pr-4 border-black">
             <div className="flex justify-center items-center mr-2">
-              <img src={google} className="h-[30px]" />
+              <img alt="google" src={google} className="h-[30px]" />
             </div>
             Sign up with Google
           </button>
           <button className="h-[51px] flex border-[1px] justify-center items-center rounded-full mr-3 md:pr-8 md:pl-8 sm:pl-4 sm:pr-4 border-black">
             <div className="flex justify-center items-center mr-2">
-              <img src={microsoft} className="h-[30px]" />
+              <img alt="microsoft" src={microsoft} className="h-[30px]" />
             </div>
             Sign up with Microsoft
           </button>
