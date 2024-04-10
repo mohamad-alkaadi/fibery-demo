@@ -84,8 +84,9 @@ const MeetingDetails = () => {
   const nameCheck = () => {
     return nameRef.current.value.trim() !== ""
   }
+
   const emailCheck = () => {
-    return emailRef.current.value.trim() !== ""
+    return validateEmail(emailRef.current.value)
   }
 
   function handleSchedule() {
@@ -111,7 +112,7 @@ const MeetingDetails = () => {
       alert("Please enter your name before scheduling.")
     } else if (!validEmail) {
       setCheckError({ email: true, name: false })
-      alert("Please enter your email before scheduling.")
+      alert("Please enter a valid email before scheduling.")
     }
   }
 
