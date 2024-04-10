@@ -63,6 +63,7 @@ function App() {
         >
           {!demoOpen ? "Open demo" : "Close"}
         </button>
+
         <DemoComponent demoOpen={demoOpen} setDemoOpen={setDemoOpen} />
         {emailSent ? <SendEmail /> : null}
       </div>

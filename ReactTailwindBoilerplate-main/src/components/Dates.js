@@ -12,18 +12,32 @@ const Dates = ({ startDay, endDay, month, yearNum }) => {
   const context = useContext(DemoContext)
   const handleClick = (dayCounter, e) => {
     context.changeSelected()
-    if (selctedDay === e.target.textContent) {
-      context.changeSelectedToFalse()
-      setSelectedDay(0)
-    } else {
-      setSelectedDay(e.target.textContent)
-      context.changeSelectedToTrue()
-
-      context.setDateTime((prevState) => ({
-        ...prevState,
-        dayName: getDayOfWeek(e.target.textContent, month, yearNum),
-      }))
+    // if (selctedDay === e.target.textContent) {
+    //   context.changeSelectedToFalse()
+    //   setSelectedDay(0)
+    // } else {
+    for (
+      var i = 0;
+      i < document.getElementsByClassName("AcitveDay").length;
+      i++
+    ) {
+      document.getElementsByClassName("AcitveDay")[i].style.background =
+        "#eff5ff"
+      document.getElementsByClassName("AcitveDay")[i].style.color = "#0269fe"
+      document.getElementsByClassName("AcitveDay")[0].style.background = "white"
+      document.getElementsByClassName("AcitveDay")[0].style.color = "#4b5563"
     }
+
+    e.target.style.background = "#0269fe"
+    e.target.style.color = "white"
+    setSelectedDay(e.target.textContent)
+    context.changeSelectedToTrue()
+
+    context.setDateTime((prevState) => ({
+      ...prevState,
+      dayName: getDayOfWeek(e.target.textContent, month, yearNum),
+    }))
+    // }
   }
 
   useEffect(() => {
@@ -45,8 +59,9 @@ const Dates = ({ startDay, endDay, month, yearNum }) => {
     function render() {
       if (dayCounter === pastDays && thisMonth + 1 === month) {
         return (
+          // current dat
           <button
-            className={`w-[45px] h-[45px] rounded-full relative hover:bg-[#0269fe] hover:text-white
+            className={`w-[45px] h-[45px] rounded-full relative hover:bg-[#0269fe] hover:text-white AcitveDay
             `}
             onMouseEnter={() => setDotHidden(true)}
             onMouseLeave={() => setDotHidden(false)}
@@ -54,19 +69,21 @@ const Dates = ({ startDay, endDay, month, yearNum }) => {
           >
             {dayCounter}
             <span
-              className={`absolute bottom-1 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-gray-600 rounded-full hover:bg-[#0269fe] ${
+              className={`absolute bottom-1 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-gray-600 rounded-full  hover:bg-[#0269fe] ${
                 dotHidden ? "hidden" : ""
               }`}
             ></span>
           </button>
         )
+        // last day
       } else if (dayCounter < pastDays && thisMonth + 1 === month) {
         return <div>{dayCounter} </div>
         // } else if (dayCounter > pastDays && thisMonth + 1 === month) {
       } else {
         return (
+          // futer day
           <button
-            className={`w-[45px] h-[45px] rounded-full bg-[#eff5ff] text-[#0c5eeb] hover:bg-[#0269fe] hover:text-white `}
+            className={`w-[45px] h-[45px] rounded-full bg-[#eff5ff] text-[#0c5eeb] hover:bg-[#0269fe] hover:text-white AcitveDay`}
             onClick={(e) => handleClick(dayCounter, e)}
           >
             {dayCounter}{" "}
